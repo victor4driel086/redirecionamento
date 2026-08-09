@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CON'26 UMADAF — Pedido recebido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07100e;
+    --card:#101f1c;
+    --cyan:#3FEFE0;
+    --cyan-dim:#1d3d39;
+    --text:#F4F8F6;
+    --muted:#89a39c;
+    --line:rgba(63,239,224,0.14);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(63,239,224,0.10), transparent 45%),
+      radial-gradient(circle at 10% 90%, rgba(63,239,224,0.05), transparent 40%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:480px;
+    padding:56px 24px 48px;
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    min-height:100vh;
+  }
+
+  /* CHECK ICON */
+  .check{
+    width:76px;
+    height:76px;
+    border-radius:50%;
+    background:var(--cyan-dim);
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:28px;
+    box-shadow:0 0 40px rgba(63,239,224,0.18);
+    animation:pop .5s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  .check svg{width:34px; height:34px; color:var(--cyan);}
+
+  @keyframes pop{
+    from{opacity:0; transform:scale(.6);}
+    to{opacity:1; transform:scale(1);}
+  }
+
+  /* MESSAGE */
+  .msg-eyebrow{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:1.8rem;
+    letter-spacing:0.2px;
+    margin-bottom:16px;
+    line-height:1.2;
+    animation:riseIn .6s ease .05s both;
+  }
+  .msg-eyebrow span{color:var(--cyan);}
+
+  .msg-body{
+    font-size:1rem;
+    line-height:1.6;
+    color:var(--muted);
+    max-width:380px;
+    margin-bottom:44px;
+    animation:riseIn .6s ease .12s both;
+  }
+
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ACTIONS */
+  .actions{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-bottom:auto;
+    animation:riseIn .6s ease .18s both;
+  }
+
+  .btn{
+    width:100%;
+    padding:18px 20px;
+    border-radius:12px;
+    text-decoration:none;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:1.02rem;
+    letter-spacing:0.3px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn svg{width:18px; height:18px; flex-shrink:0;}
+
+  .btn-primary{
+    background:var(--cyan);
+    color:#04211d;
+    text-transform:uppercase;
+  }
+  .btn-primary:hover{
+    background:#5ff7ea;
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px -8px rgba(63,239,224,0.5);
+  }
+
+  .btn-secondary{
+    background:transparent;
+    color:var(--text);
+    border:1px solid var(--line);
+  }
+  .btn-secondary:hover{
+    background:var(--card);
+    border-color:var(--cyan);
+    transform:translateY(-2px);
+  }
+
+  .btn:active{transform:translateY(0) scale(.99);}
+
+  /* WHATSAPP FOOTER */
+  .whats-wrap{
+    width:100%;
+    padding-top:48px;
+    animation:riseIn .6s ease .24s both;
+  }
+
+  .btn-whats{
+    width:100%;
+    padding:16px 20px;
+    border-radius:12px;
+    background:#0e2420;
+    border:1px solid var(--line);
+    color:var(--cyan);
+    text-decoration:none;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .btn-whats:hover{
+    transform:translateY(-2px);
+    border-color:var(--cyan);
+    box-shadow:0 10px 22px -10px rgba(63,239,224,0.35);
+  }
+  .btn-whats svg{width:19px; height:19px; flex-shrink:0;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <div class="check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+
+    <h1 class="msg-eyebrow">Pedido <span>recebido!</span></h1>
+    <p class="msg-body">
+      Obrigado por solicitar sua camisa do CON'26 UMADAF. Em breve entraremos em contato para finalizar a compra.
+    </p>
+
+    <div class="actions">
+      <!-- Aponta para a página de pedidos (index.html). Troque se necessário -->
+      <a class="btn btn-primary" href="index.html">
+        Comprar nova camisa
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <!-- Substitua o href pelo link do site principal da igreja -->
+      <a class="btn btn-secondary" href="#">
+        Voltar ao site
+      </a>
+    </div>
+
+    <div class="whats-wrap">
+      <!-- Substitua "5500000000000" pelo número real com DDI+DDD (ex: 5511999999999) -->
+      <a class="btn-whats" href="https://wa.me/5586981415231?text=Ol%C3%A1!%20Tenho%20d%C3%BAvidas%20sobre%20a%20solicita%C3%A7%C3%A3o%20das%20camisas." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.7.44 3.35 1.28 4.81L2.05 22l5.42-1.42c1.41.77 3 1.18 4.6 1.18h.01c5.46 0 9.9-4.45 9.9-9.91C21.98 6.45 17.53 2 12.04 2zm5.79 14.02c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.13.11-1.82-.11-.42-.14-.96-.31-1.65-.62-2.9-1.26-4.79-4.18-4.94-4.38-.14-.2-1.18-1.58-1.18-3.01 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.65.5.24.58.82 2 .89 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.24 2.22 1.38.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.68-.17 1.36z"/></svg>
+        Dúvidas? Fale conosco!
+      </a>
+    </div>
+
+  </div>
+
+</body>
+</html>
